@@ -27,10 +27,18 @@
         let x = canvas.width / 2;
         let y = canvas.height - 30;
   function ballColor() {
+      if(x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
         const r = Math.floor(Math.random() * 256);
         const g = Math.floor(Math.random() * 256);
         const b = Math.floor(Math.random() * 256);
         return `rgb(${r}, ${g}, ${b})`;
+      }
+      if(y + dy > canvas.height - ballRadius || y + dy < ballRadius) {
+        const r = Math.floor(Math.random() * 256);
+        const g = Math.floor(Math.random() * 256);
+        const b = Math.floor(Math.random() * 256);
+        return `rgb(${r}, ${g}, ${b})`;
+      }
   }
   function drawBall() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
