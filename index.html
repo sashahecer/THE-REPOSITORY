@@ -61,7 +61,7 @@ const ballRadius = 10;
 
       else if (y + dy > canvas.height - ballRadius - paddleHeight) {
       if (x > paddleX && x < paddleX + paddleWidth) {
-      dy = -dy;
+      dy = -dy - 1;
     } else {
       alert("Game Over");
       document.location.reload();
