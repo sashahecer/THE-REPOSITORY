@@ -52,12 +52,22 @@ const ballRadius = 10;
       drawBall();
       drawPaddle();
       
-      if(y + dy < 0) {
-      dy = -dy;
+      if(x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
+      dx = -dx;
       }
-      if(y + dy > canvas.height - ballRadius || y + dy < ballRadius) {
+      if(y + dy < ballRadius) {
         dy = -dy;
       }
+
+      else if (y + dy > canvas.height - ballRadius - paddleHeight) {
+      if (x > paddleX && x < paddleX + paddleWidth) {
+      dy = -dy;
+    } else {
+      alert("Game Over");
+      document.location.reload();
+      return;
+    }
+  }
 
       if (rightPressed && paddleX < canvas.width - paddleWidth) {
         paddleX += 7;
