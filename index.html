@@ -79,6 +79,10 @@ function draw() {
   if(y + dy < ballRadius) {
     dy = -dy;
   } else if (y + dy > canvas.height - ballRadius) {
+    if (x > paddleX && x < paddleX + paddleWidth) {
+      dy = -dy - 0.2;
+    }
+  } else if (y + dy > canvas.height - ballRadius) {
     alert ('LASHARA');
     cleanInterval(interval);
     document.location.reload();
