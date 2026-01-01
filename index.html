@@ -55,8 +55,8 @@ function drawBricks() {
     for(let r = 0; r < brickRowCount; r++) {
       const brickX = (c * (brickWidth + brickPadding)) + brickOffsetLeft;
       const brickY = (r * (brickHeight + brickPadding)) + brickOffsetTop;
-      brick[c][r].x = brickX;
-      brick[c][r].y = brickY;
+      bricks[c][r].x = brickX;
+      bricks[c][r].y = brickY;
       ctx.beginPath();
       ctx.rect(brickX, brickY, brickWidth, brickHeight);
       ctx.fillStyle = '#0095DD';
