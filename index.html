@@ -50,17 +50,6 @@ for (let c = 0; c < brickColumCount; c++) {
 document.addEventListener('keydown', keyDownHandler, false);
 document.addEventListener('keyup', keyUpHandler, false);
 
-function collisionDetection() {
-  for (let c = 0; c < brickColumCount; c++) {
-    for (let r = 0; r < brickRowCount; r++) {
-      const b = bricks[c][r];
-      if (x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight) {
-        dy = -dy;
-      }
-    }
-  }
-}
-
 function drawBricks() {
   for(let c = 0; c < brickColumCount; c++) {
     for(let r = 0; r < brickRowCount; r++) {
@@ -91,6 +80,17 @@ function keyUpHandler(event) {
     rightPressed = false;
   } else if (event.keyCode === 37) {
     leftPressed = false;
+  }
+}
+
+function collisionDetection() {
+  for (let c = 0; c < brickColumCount; c++) {
+    for (let r = 0; r < brickRowCount; r++) {
+      const b = bricks[c][r];
+      if (x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight) {
+        dy = -dy;
+      }
+    }
   }
 }
 
