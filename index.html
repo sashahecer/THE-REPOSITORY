@@ -42,6 +42,7 @@
     const brickOffsetLeft = 30;
     const bricks = [];
     let rgb = `${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}`;
+    let score = 0;
 
     for (let c = 0; c < brickColumCount; c++) {
       bricks[c] = [];
@@ -52,6 +53,7 @@
 
     document.addEventListener('keydown', keyDownHandler, false);
     document.addEventListener('keyup', keyUpHandler, false);
+
 
     function drawBricks() {
       for (let c = 0; c < brickColumCount; c++) {
@@ -77,6 +79,9 @@
     }
 
     function keyDownHandler(event) {
+      if (event.key.toLowerCase() === 'r') {
+        document.location.reload();
+      }
       if (event.keyCode === 39) {
         rightPressed = true;
       } else if (event.keyCode === 37) {
@@ -101,11 +106,39 @@
             dy = -dy;
             rgb = `${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}`;
             b.status = 0;
+            score++;
+            if (score === brickRowCount * brickColumCount) {
+              alert('YOU WIN, CONGRATULATIONS!');
+              if (confirm('Do you want to play again?')) {
+                document.location.reload();
+              }
+            }
           }
         }
       }
     }
   }
+  function gameOver() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.font = '16px Arial';
+    ctx.fillStyle = '#0095DD';
+    ctx.fillText('Game Over', 60, 80);
+    drawScore(60, 100);
+    drawText(60, 120, 'Press R to restart the game');
+    
+  }
+
+  function drawScore(x, y) {
+      ctx.font = '16px Arial';
+      ctx.fillStyle = '#0095DD';
+      ctx.fillText('Score: ' + score, x, y);
+    }
+
+  function drawText(x, y, text) {
+      ctx.font = '16px Arial';
+      ctx.fillStyle = '#0095DD';
+      ctx.fillText(`${text}`, x, y);
+    }
 
     function drawBall() {
       ctx.beginPath();
@@ -128,6 +161,7 @@
       drawBricks();
       drawBall();
       drawPaddle();
+      drawScore(8, 20);
       collisionDetection();
 
       if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
@@ -141,7 +175,7 @@
           dy = -dy - 0.2;
         } else if (y + dy > canvas.height - ballRadius) {
           clearInterval(interval);
-          document.location.reload();
+          gameOver();
         }
       }
 
